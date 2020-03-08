@@ -3,7 +3,16 @@ const Product = require('../models/Product')
 class ProductController {
   static add (req, res, next) {
     const { name, price, desc } = req.parseData
-    // Product/
+    Product
+      .create({
+        name,
+        price: 'Rp ' + price,
+        desc
+      })
+      .then(result => {
+        res.status(201).json(result)
+      })
+      .catch(next)
   }
   static get (req, res, next) {
     Product
